@@ -22,6 +22,7 @@ const Header = () => {
     );
 };
 
+//https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.1388554&lng=80.1092932&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING
 
 const resList = [
         {
