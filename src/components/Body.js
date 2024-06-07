@@ -1,16 +1,33 @@
 import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockData";
+import {useState} from "react";
+
+//let resList; this is the method of creating Normal JS variable.
 
 const Body = () => {
+
+    //Local State variable - super powerful variable
+    const[listOfRestaurants, setListOfRestaurants] = useState(resList); // This the method of creating state variable
     return(
         <div className="body">
 
-            <div className="search">
-                Search
+            <div className="filter">
+                <button 
+                    className="filter-btn"
+                    onClick={() => {
+                        const filteredList = listOfRestaurants.filter(
+                            (res) => res.info.avgRating >= 4
+                        );
+                        setListOfRestaurants(filteredList)
+                        console.log("Button Clicked");
+                    }}
+                    >
+                      Top Rated Restaurants
+                </button>
             </div>
 
             <div className="res-container">            
-                {resList.map((restaurant) => (
+                {listOfRestaurants.map((restaurant) => (
                     <RestaurantCard key={restaurant.info.id} resData={restaurant} />
                 ))}
             </div>
