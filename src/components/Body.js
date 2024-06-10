@@ -1,13 +1,39 @@
 import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockData";
-import {useState} from "react";
+import {useState,useEffect} from "react";
+import Shimmer from "./Shimmer";
 
 //let resList; this is the method of creating Normal JS variable.
 
 const Body = () => {
 
     //Local State variable - super powerful variable
-    const[listOfRestaurants, setListOfRestaurants] = useState(resList); // This the method of creating state variable
+    const[listOfRestaurants, setListOfRestaurants] = useState([]); // This the method of creating state variable
+
+    
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async() => {
+        const data = await fetch(
+            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.1388554&lng=80.1092932&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        );
+        // Check console for obtaining the proper data path from the API instead of opening the API in new tab. For this first console.log the json file.
+
+        const json = await data.json();
+
+        console.log(json);
+
+        //Optional chaining
+        setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    };
+
+    if(listOfRestaurants.length === 0){
+        return <Shimmer />;
+    }
+
+
     return(
         <div className="body">
 
