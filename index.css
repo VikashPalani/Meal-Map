@@ -73,3 +73,27 @@
     height: 400px;
     background-color: beige;
 }
+
+.login{
+    padding: 5px;
+    margin: 10px;
+    margin-top: 25px;
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+}
+
+.search{
+    margin: 10px;
+    margin-left: 1px;
+}
+
+.search-btn{
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.filter{
+    margin-top: 20px;
+    display: flex;
+}
