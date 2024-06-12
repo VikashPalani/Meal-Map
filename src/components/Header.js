@@ -1,5 +1,8 @@
 import { LOGO_IMG, LOGO_URL } from "../utils/constants";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
+//Link component works exactly like an anchor tag for React
 
 const Header = () => {
 
@@ -15,10 +18,18 @@ const Header = () => {
             </div>
             <div className="nav-items">
                 <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact Us</li>
-                    <li>Cart</li>
+                    <li>
+                        <Link to = "/">Home</Link>    
+                    </li>
+                    <li>
+                        <Link to = "/about">About Us</Link>
+                    </li>
+                    <li>
+                        <Link to = "/contact">Contact Us</Link>
+                    </li>
+                    <li>
+                        <Link to = "/cart">Cart</Link>
+                    </li>
                     <button 
                         className="login"
                         onClick={() => {

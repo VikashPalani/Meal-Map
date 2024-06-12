@@ -8,13 +8,20 @@ import Shimmer from "./Shimmer";
 const Body = () => {
 
     //Local State variable - super powerful variable
+    //Always create and call useState hooks inside a component and not outsie it (Error is occur)
+
+    //useState is used to create local state variables inside the functional components
     const[listOfRestaurants, setListOfRestaurants] = useState([]); // This the method of creating state variable
     const[filteredRestaurant, setFilteredRestaurant] = useState([]);
-
     const[searchText,setSearchText] = useState("");
 
     console.log("Body Rendered");
     
+    //useEffect() has two arguments, callback function and a dependency array(Optional)
+    //useEffect is called after every render of that component (Dependency array will change the rendering cycle)
+    //if dependency array id empty = [] => useEffect is called on the initial render(just once)
+    //if dependency array contains something inside it => useEffect is called everytime when the elements inside it updates.
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -27,19 +34,21 @@ const Body = () => {
 
         const json = await data.json();
 
-        //console.log(json);
+        console.log(json);
 
         //Optional chaining
+        //This step is the destructing of Data
         setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
 
     //Conditional Rendering using ternary operator
 
-    return listOfRestaurants.length === 0? <Shimmer /> : (
+    return (listOfRestaurants&&listOfRestaurants.length === 0)? <Shimmer /> : (
 
         <div className="body">
             <div className="filter">
+
                 <div className="search">
                     <input
                         type ="text"
@@ -49,7 +58,7 @@ const Body = () => {
                             setSearchText(e.target.value);
                         }}
                     />
-                    <button onClick={
+                    <button className="searchBtn" onClick={
                         () => {
                             console.log(searchText);
                             //Filter the restaurant cards and update the UI
@@ -62,15 +71,16 @@ const Body = () => {
                             
                         }
                     } 
-                    className="search-btn">Search</button>
+                    >Search</button>
                 </div>
+
                 <button 
                     className="filter-btn"
                     onClick={() => {
-                        const filteredList = listOfRestaurants.filter(
+                        const filterLogic = listOfRestaurants.filter(
                             (res) => res.info.avgRating >= 4
                         );
-                        setListOfRestaurants(filteredList)
+                        setListOfRestaurants(filterLogic)
                         console.log("Button Clicked");
                     }}
                     >
@@ -79,7 +89,7 @@ const Body = () => {
             </div>
 
             <div className="res-container">            
-                {filteredRestaurant.map((restaurant) => (
+                {filteredRestaurant&&filteredRestaurant.map((restaurant) => (
                     <RestaurantCard key={restaurant.info.id} resData={restaurant} />
                 ))}
             </div>
