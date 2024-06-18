@@ -8,8 +8,7 @@ const About = () => {
             <br>
             </br>
             <h2><u>Owner</u></h2>
-            <User name={"Vikash P from Function"} location={"Chennai"}/>
-            {/* <UserClass name={"Vikash P from Class"} location={"Chennai"}/> */}
+            <UserClass/>
         </div>
     )
 }
