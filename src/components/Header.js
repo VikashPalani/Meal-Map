@@ -1,12 +1,14 @@
 import { LOGO_IMG, LOGO_URL } from "../utils/constants";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import UseOnlineStatus from "../utils/useOnlineStatus";
 
 //Link component works exactly like an anchor tag for React
 
 const Header = () => {
 
     const [btnName, setBtnName] = useState("Login");
+    const onlineStatus = UseOnlineStatus();
 
     return(
         <div className = "header">
@@ -29,6 +31,9 @@ const Header = () => {
                     </li>
                     <li>
                         <Link to = "/cart">Cart</Link>
+                    </li>
+                    <li>
+                        {onlineStatus?"✅":"🔴"}
                     </li>
                     <button 
                         className="login"

@@ -1,8 +1,8 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
 import {useState,useEffect} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import UseOnlineStatus from "../utils/useOnlineStatus";
 
 //let resList; this is the method of creating Normal JS variable.
 
@@ -42,6 +42,15 @@ const Body = () => {
         setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
+
+    const onlineStatus = UseOnlineStatus();
+    if(onlineStatus===false){
+        return(
+            <h2>
+                Looks like you're offline!! Please check your internet connection.
+            </h2>
+        )
+    }
 
     //Conditional Rendering using ternary operator
 
