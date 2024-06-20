@@ -16,12 +16,12 @@ const RestaurantCard = (props) => {
     // This step is destructing of an object
 
     return(
-        <div className="m-2 p-3 w-[300px] h-[550px] bg-slate-200 rounded-lg">
+        <div className="mx-2 my-4 p-3 w-[300px] h-[550px] bg-slate-200 rounded-lg hover:bg-slate-300">
             <img 
-                className = "rounded-lg h-[300px]" 
+                className = "rounded-lg h-[300px] w-[280px]" 
                 src = {CDN_URL + cloudinaryImageId}
             />
-            <h3 className="font-bold py-4">{name}</h3>
+            <h3 className="font-bold py-4 text-lg">{name}</h3>
             <h4>{cuisines.join(", ")}</h4>
             <h4>{avgRating} stars</h4>
             <h4>{costForTwo}</h4>

@@ -59,7 +59,7 @@ const Body = () => {
         <div className="body">
             <div className="filter flex">
 
-                <div className="search m-4 p-4">
+                <div className="search m-1 pl-1 p-4">
                     <input
                         type ="text"
                         className="m-4 border border-solid border-black"
@@ -83,7 +83,7 @@ const Body = () => {
                     } 
                     >Search</button>
                 </div>
-                <div className="search m-4 p-4 flex items-center">
+                <div className="search m-4 p-4 flex items-center ">
                     <button 
                         className="px-4 py-2 bg-gray-100 rounded-lg "
                         onClick={() => {
