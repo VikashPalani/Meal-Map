@@ -1,5 +1,5 @@
 export const LOGO_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXlAzLqX93b4VNZYPBQY9WTOqWGctf7aGlJg&s";
-export const LOGO_IMG=require("./images/MealMap.png");
+export const LOGO_IMG=require("./images/MM.png");
 export const CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"
 
 //NAME EXPORT is used when, we have to export multiple things from a single file
