@@ -22,14 +22,32 @@ const RestaurantCard = (props) => {
                 src = {CDN_URL + cloudinaryImageId}
             />
             <h3 className="font-bold py-4 text-lg">{name}</h3>
-            <h4>{cuisines.join(", ")}</h4>
+            <h4 className="font-medium mb-2">{cuisines.join(", ")}</h4>
             <h4>{avgRating} stars</h4>
-            <h4>{costForTwo}</h4>
             <h4>{resData?.info?.sla?.deliveryTime} minutes</h4> 
+            <h4>{costForTwo}</h4>
         </div>
     );
 };
 
 // The join() method returns an array as a string, and a seperator can be specified.
+
+//Higher Order Component
+//input - RestaurantCard ==> Output - RestaurantCardwithPromoted
+// In our data we don't have the value for promoted so we will use "isOpen" instead of that.
+
+
+export const withPromotedLabel = (RestaurantCard) => {
+    return (props) => {
+        return(
+            <div>
+                <label className="absolute bg-black opacity-80 text-white m-2 p-2 rounded-lg">Promoted</label>
+                <RestaurantCard {...props}/>
+            </div>
+        );
+    }; 
+};
+
+// ...props is spread operator; It passes all the props to the < RestaurantCard />
 
 export default RestaurantCard;

@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import {useState,useEffect} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -15,6 +15,10 @@ const Body = () => {
     const[listOfRestaurants, setListOfRestaurants] = useState([]); // This the method of creating state variable
     const[filteredRestaurant, setFilteredRestaurant] = useState([]);
     const[searchText,setSearchText] = useState("");
+
+    const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
+    const promoted = "and"
 
     console.log("Body Rendered");
     
@@ -57,18 +61,18 @@ const Body = () => {
     return (listOfRestaurants&&listOfRestaurants.length === 0)? <Shimmer /> : (
 
         <div className="body">
-            <div className="filter flex">
+            <div className="filter flex justify-between">
 
                 <div className="search m-1 pl-1 p-4">
                     <input
                         type ="text"
-                        className="m-4 border border-solid border-black"
+                        className="m-4 border border-solid border-black rounded-md"
                         value={searchText}
                         onChange={(e) => {
                             setSearchText(e.target.value);
                         }}
                     />
-                    <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" onClick={
+                    <button className="px-4 py-2 bg-gray-700 text-white mx-2 my-4 rounded-lg " onClick={
                         () => {
                             console.log(searchText);
                             //Filter the restaurant cards and update the UI
@@ -81,11 +85,13 @@ const Body = () => {
                             
                         }
                     } 
-                    >Search</button>
+                    >
+                        Search
+                    </button>
                 </div>
-                <div className="search m-4 p-4 flex items-center ">
+                <div className="search my-4 mx-2 p-4 flex justify-items-center">
                     <button 
-                        className="px-4 py-2 bg-gray-100 rounded-lg "
+                        className="px-4 py-2 bg-gray-700 text-white rounded-lg"
                         onClick={() => {
                             const filterLogic = listOfRestaurants.filter(
                                 (res) => res.info.avgRating >= 4
@@ -105,7 +111,10 @@ const Body = () => {
                         key={restaurant.info.id}
                         to= {"/restaurants/" + restaurant.info.id}
                     >
-                        <RestaurantCard resData={restaurant} />
+                        {
+                            restaurant.info.name.toLowerCase().includes(promoted.toLowerCase()) ? (<RestaurantCardPromoted resData={restaurant}/>)
+                            : (<RestaurantCard resData = {restaurant} />)
+                        }
                     </Link>
                 ))}
             </div>
