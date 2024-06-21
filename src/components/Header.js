@@ -14,7 +14,7 @@ const Header = () => {
         <div className = " h-[150px] flex justify-between mb-2 bg-slate-400 shadow-lg">
             <div className="logo-container">
                 <img                
-                    className = " m-2 p-2 w-[180px] h-[13S0px]"
+                    className = " m-2 p-2 w-[180px] h-[130px]"
                     src = {LOGO_IMG}
                 />
             </div>
