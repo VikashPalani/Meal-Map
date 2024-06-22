@@ -2,6 +2,7 @@ export const LOGO_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ
 export const LOGO_IMG=require("./images/MM.png");
 export const CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"
 export const ERROR = require("./images/blueError.png");
+export const OFFLINE = require("./images/offline.png");
 
 //NAME EXPORT is used when, we have to export multiple things from a single file
 // Becuase, we can't use EXPORT DEFAULT twice in a same file, it will show an error.
