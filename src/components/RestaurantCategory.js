@@ -1,30 +1,37 @@
+import { useState } from "react";
 import SubCategoryList from "./SubCategoryList";
 import ItemList from "./ItemList";
 
-const RestaurantCategory = (data) => {
-// console.log(data);
+const RestaurantCategory = ({ data }) => {
+    const [showItems, setShowItems] = useState({});
 
-    return(
+    const handleSubCategoryClick = (categoryTitle) => {
+        setShowItems(prevState => ({
+            ...prevState,
+            [categoryTitle]: !prevState[categoryTitle]
+        }));
+    };
+
+    return (
         <div>
-            {/** Header */}
-            <div className="w-8/12 mx-auto mt-4 mb-10 bg-gray-50 shadow-sm p-4">
+            <div className="w-10/12 mx-auto mt-4 mb-10 bg-gray-100 shadow-sm p-4">
                 <div className="flex justify-between">
-                    <span className="text-xl font-bold">
-                        {data?.data?.title}
+                    <span className="text-xl font-bold mb-6">
+                        {data?.title}
                     </span>
-                    {/* <span className="text-2xl">↓</span> */}
                 </div>
-                {/** Accordion Body */}
-
-                {data?.data?.categories.map((category) => (
-                    <div key= {category.title}>
-                        <SubCategoryList subCategory={category}/>
-                        <ItemList items={category?.itemCards}/>
+                {data?.categories.map((category) => (
+                    <div key={category.title}>
+                        <SubCategoryList 
+                            subCategory={category}
+                            onSubCategoryClick={() => handleSubCategoryClick(category.title)}
+                        />
+                        {showItems[category.title] && <ItemList items={category?.itemCards} />}
                     </div>
                 ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default RestaurantCategory;
