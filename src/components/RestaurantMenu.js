@@ -17,13 +17,14 @@ const RestaurantMenu = () => {
         resInfo?.data?.cards[2]?.card?.card?.info;
 
     const{itemCards} = resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
-    console.log(resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
+    // console.log(resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
 
     const categories = 
         resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
             c => c.card?.card?.["@type"] ===
              "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
         );
+    // console.log(categories);
 
     return(
         <div className="text-center">
@@ -32,7 +33,11 @@ const RestaurantMenu = () => {
             <p className="font-bold text-lg mb-10">{costForTwoMessage} - {totalRatingsString}</p>
 
             {/* Categories Accordion*/}
-            {categories.map((category) => <RestaurantCategory data={category?.card?.card}/>)}
+            {categories.map((category) => (
+                <div key= {category.title}>
+                    <RestaurantCategory data={category?.card?.card}/>
+                </div>
+            ))};
         </div>
     )
 }

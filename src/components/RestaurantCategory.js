@@ -2,18 +2,27 @@ import SubCategoryList from "./SubCategoryList";
 import ItemList from "./ItemList";
 
 const RestaurantCategory = (data) => {
-console.log(data);
+// console.log(data);
 
     return(
         <div>
             {/** Header */}
-            <div className="w-6/12 mx-auto my-4 bg-gray-50 shadow-lg p-4 flex justify-between">
-                <span className="text-xl font-semibold">{data?.data.title} ({data?.data?.categories[0]?.itemCards?.length})</span>
-                <span className="text-2xl">↓</span>
+            <div className="w-8/12 mx-auto mt-4 mb-10 bg-gray-50 shadow-sm p-4">
+                <div className="flex justify-between">
+                    <span className="text-xl font-bold">
+                        {data?.data?.title}
+                    </span>
+                    {/* <span className="text-2xl">↓</span> */}
+                </div>
+                {/** Accordion Body */}
+
+                {data?.data?.categories.map((category) => (
+                    <div key= {category.title}>
+                        <SubCategoryList subCategory={category}/>
+                        <ItemList items={category?.itemCards}/>
+                    </div>
+                ))}
             </div>
-            {/** Accordion Body */}
-            <SubCategoryList subCategory={data?.data?.categories}/>
-            <ItemList items={data?.data?.categories?.itemCards}/>
         </div>
     )
 }
