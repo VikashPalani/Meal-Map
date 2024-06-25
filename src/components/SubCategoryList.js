@@ -1,4 +1,4 @@
-import { FaArrowDownLong } from "react-icons/fa6";
+import { FaChevronDown } from "react-icons/fa";
 
 const SubCategoryList = ({ subCategory, onSubCategoryClick }) => {
     return (
@@ -8,7 +8,7 @@ const SubCategoryList = ({ subCategory, onSubCategoryClick }) => {
                     <span className="text-xl font-semibold">
                         {subCategory.title} ({subCategory.itemCards.length})
                     </span>
-                    <span className="text-xl"><FaArrowDownLong /></span>
+                    <span className="text-xl"><FaChevronDown /></span>
                 </div>
             </div>
         </div>
