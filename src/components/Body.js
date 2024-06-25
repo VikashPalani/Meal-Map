@@ -1,8 +1,9 @@
 import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
-import {useState,useEffect} from "react";
+import {useState,useEffect,useContext} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import UseOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 //let resList; this is the method of creating Normal JS variable.
 
@@ -20,7 +21,7 @@ const Body = () => {
 
     const promoted = "and"
 
-    console.log("Body Rendered");
+    // console.log("Body Rendered");
     
     //useEffect() has two arguments, callback function and a dependency array(Optional)
     //useEffect is called after every render of that component (Dependency array will change the rendering cycle)
@@ -39,7 +40,7 @@ const Body = () => {
 
         const json = await data.json();
 
-        console.log(json);
+        // console.log(json);
 
         //Optional chaining
         //This step is the destructing of Data
@@ -55,6 +56,8 @@ const Body = () => {
             </h2>
         )
     }
+
+    const{loggedInUser,setUserName} = useContext(UserContext);
 
     //Conditional Rendering using ternary operator
 
@@ -89,12 +92,12 @@ const Body = () => {
                         Search
                     </button>
                 </div>
-                <div className="search my-4 mx-2 p-4 flex justify-items-center">
+                <div className="search my-4 mx-2 p-5 flex justify-items-center">
                     <button 
                         className="px-4 py-2 bg-gray-700 text-white rounded-lg"
                         onClick={() => {
                             const filterLogic = listOfRestaurants.filter(
-                                (res) => res.info.avgRating >= 4
+                                (res) => res.info.avgRating >= 4.5
                             );
                             setListOfRestaurants(filterLogic)
                             console.log("Button Clicked");
@@ -103,6 +106,16 @@ const Body = () => {
                         Top Rated Restaurants
                     </button>
                 </div>
+
+                <div className="search m-4 p-4 flex items-center">
+                    <label>Username : </label>
+                    <input
+                        className="m-2 p-2 border border-solid border-black rounded-md"
+                        value={loggedInUser}
+                        onChange={(e) => setUserName(e.target.value)}
+                    />
+                </div>
+
             </div>
 
             <div className="flex flex-wrap">            

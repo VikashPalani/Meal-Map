@@ -9,15 +9,31 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Offline from "./components/Offline";
+import UserContext from "./utils/UserContext";
+import { useState, useEffect } from "react";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
 const AppLayout = () => {
+
+    const[userName,setUserName] = useState();
+
+    //authenticating the user
+    useEffect(() => {
+        //Make an API call and send username and other details
+        const data = {
+            name: "Vikash",
+        };
+        setUserName(data.name);
+    }, []);
+
     return(
+        <UserContext.Provider value = {{loggedInUser: userName, setUserName}}>
         <div className = "app">
             <Header />
             <Outlet /> {/** Outlet will be filled with the childeren according to the path */}
         </div>
+        </UserContext.Provider>
     );
 };
 
