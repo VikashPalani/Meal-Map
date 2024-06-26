@@ -9,8 +9,12 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Offline from "./components/Offline";
+import Cart from "./components/Cart";
+
 import UserContext from "./utils/UserContext";
 import { useState, useEffect } from "react";
+import {Provider} from "react-redux"; //This is like a bridge between react app and redux
+import appStore from "./utils/appStore";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
@@ -28,12 +32,14 @@ const AppLayout = () => {
     }, []);
 
     return(
-        <UserContext.Provider value = {{loggedInUser: userName, setUserName}}>
-        <div className = "app">
-            <Header />
-            <Outlet /> {/** Outlet will be filled with the childeren according to the path */}
-        </div>
-        </UserContext.Provider>
+        <Provider store={appStore}>
+            <UserContext.Provider value = {{loggedInUser: userName, setUserName}}>
+            <div className = "app">
+                <Header />
+                <Outlet /> {/** Outlet will be filled with the childeren according to the path */}
+            </div>
+            </UserContext.Provider>
+        </Provider>
     );
 };
 
@@ -70,6 +76,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/offline",
                 element: <Offline />,
+            },
+            {
+                path: "/cart",
+                element: <Cart />,
             },
         ],
         errorElement: <Error />

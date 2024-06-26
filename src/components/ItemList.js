@@ -1,6 +1,15 @@
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 import { CDN_URL } from "../utils/constants";
 
 const ItemList = ({items}) => {
+
+    const dispatch = useDispatch();
+
+    const handleAddItem = (item) => {
+        //dispatch an action
+        dispatch(addItem(item));
+    }
 
     return( 
     <div>
@@ -18,7 +27,12 @@ const ItemList = ({items}) => {
                     <p className="text-md my-3">{item?.card?.info?.description}</p>
                     <div className="flex items-center">
                         <span className="text-md my-3 mr-3">{item?.card?.info?.ratings?.aggregatedRating?.rating} ★</span>
-                        <button className="p-3 w-[60px] h-[40px] flex items-center justify-center bg-black text-white shadow-lg rounded-md">Add</button>
+                        <button className="p-3 w-[80px] h-[40px] flex items-center justify-center bg-black text-white shadow-lg rounded-md"
+                            //We are using a callback function here instead directly calling {handleAddItem(item)}
+                            onClick = {() => handleAddItem(item)}
+                        >
+                            Add +
+                        </button>
                     </div>
 
                 </div>
